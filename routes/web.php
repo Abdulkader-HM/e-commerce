@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +23,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::get('/', function () {
-//     return view('product.index');
-// });
+Route::get('/', function () {
+    return view('product.index');
+});
 // Route::post('products/store', [ProductController::class, 'store']);
 // Route::resource('products', ProductController::class);
 
@@ -35,6 +37,8 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('products/edit/{id}', 'edit')->name('edit');
     Route::put('products/update{id}', 'update')->name('update');
     Route::get('products/delete/{id}', 'destroy')->name('delete');
-    Route::get('products/delete/all','products')->name('delete.all');
-    Route::get('products/truncate','truncate')->name('truncate');
+    Route::get('products/delete/all', 'products')->name('delete.all');
+    Route::get('products/truncate', 'truncate')->name('truncate');
 });
+
+Route::resource('posts', PostController::class);

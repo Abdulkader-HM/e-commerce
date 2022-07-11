@@ -19,6 +19,7 @@
     <!-- Bootstrap core CSS -->
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
+
     <style>
         .container {
             max-width: 960px;
@@ -92,7 +93,6 @@
                 flex: 1;
             }
         }
-        
     </style>
 
 
@@ -113,10 +113,10 @@
                         d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
                 </svg>
             </a>
-            <a class="py-2 d-none d-md-inline-block" href="{{ route('create') }}">Create</a>
-            <a class="py-2 d-none d-md-inline-block" href="{{ route('show') }}">Show</a>
-            <a class="py-2 d-none d-md-inline-block" href="#">Features</a>
-            <a class="py-2 d-none d-md-inline-block" href="#">Enterprise</a>
+            <a class="py-2 d-none d-md-inline-block" href="{{ route('create') }}">Create product</a>
+            <a class="py-2 d-none d-md-inline-block" href="{{ route('show') }}">Show products</a>
+            <a class="py-2 d-none d-md-inline-block" href="{{ route('posts.create') }}">create post</a>
+            <a class="py-2 d-none d-md-inline-block" href="{{ route('posts.index') }}">show posts</a>
             <a class="py-2 d-none d-md-inline-block" href="#">Support</a>
             <a class="py-2 d-none d-md-inline-block" href="#">Pricing</a>
             <a class="py-2 d-none d-md-inline-block" href="#">Cart</a>
@@ -127,7 +127,7 @@
     @yield('content')
 
 
-    <footer class="container py-5">
+    {{-- <footer class="container py-5">
         <div class="row">
             <div class="col-12 col-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -179,10 +179,12 @@
                 </ul>
             </div>
         </div>
-    </footer>
+    </footer> --}}
 
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('pickadate/lib/post.js') }}"></script>
+
 
 
 </body>
