@@ -21,25 +21,20 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('product.index');
-});
-
-Route::get('/create', function () {
-    return view('product.create');
-});
-
-Route::get('/show', function () {
-    return view('product.show');
-});
-
-
-
-// Route::controller(TestController::class)->Group(function () {
-//     Route::get('test', 'test');
+// Route::get('/', function () {
+//     return view('product.index');
 // });
+// Route::post('products/store', [ProductController::class, 'store']);
+// Route::resource('products', ProductController::class);
 
-// Route::controller(ProductController::class)->group(function () {
-//     Route::get('index', 'index');
-//     // Route::post('store', 'store')->name('store');
-// });
+Route::controller(ProductController::class)->group(function () {
+    Route::get('products/index', 'index')->name('index');
+    Route::get('products/create', 'create')->name('create');
+    Route::post('products/store', 'store')->name('store');
+    Route::get('products/show', 'show')->name('show');
+    Route::get('products/edit/{id}', 'edit')->name('edit');
+    Route::put('products/update{id}', 'update')->name('update');
+    Route::get('products/delete/{id}', 'destroy')->name('delete');
+    Route::get('products/delete/all','products')->name('delete.all');
+    Route::get('products/truncate','truncate')->name('truncate');
+});

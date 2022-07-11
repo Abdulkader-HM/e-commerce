@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -24,7 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.create');
     }
 
     /**
@@ -36,7 +37,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = product::create($request->all());
-        return 'good job';
+        // DB::table('products')->insert([
+        //     'name' => $request->name,
+        //     'price' => $request->price
+        // ]);
+        return view('product.create');
     }
 
     /**
@@ -45,9 +50,10 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(product $product)
+    public function show()
     {
-        //
+        $products = DB::table('products')->get();
+        return view('product.show', compact('products'));
     }
 
     /**
@@ -56,9 +62,10 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(product $product)
+    public function edit($id)
     {
-        //
+        $data = DB::table('products')->where('id', $id)->first();
+        return view('product.edit', compact('data'));
     }
 
     /**
@@ -68,9 +75,16 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $product = DB::table('products')->where('id', $id)->update([
+            'name' => $request->name,
+            'price' => $request->price
+        ]);
+        $products = DB::table('products')->get();
+
+        // return view('product.show', compact('products'));
+        return redirect()->route('show');
     }
 
     /**
@@ -79,8 +93,21 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(product $product)
+    public function destroy($id)
     {
-        //
+        DB::table('products')->where('id', $id)->delete();
+        return redirect()->route('show');
+    }
+
+    public function deleteAll()
+    {
+        DB::table('products')->delete();
+        return redirect()->route('show');
+    }
+
+    public function truncate()
+    {
+        DB::table('products')->truncate();
+        return redirect()->route('show');
     }
 }
