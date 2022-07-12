@@ -84,9 +84,6 @@
                     <th> Discription</th>
                     <th>Edit</th>
                     <th>Delete</th>
-                    <th>
-                        <a href="{{ route('delete') }}" class="btn btn-block">return</a>
-                    </th>
                 </tr>
             </thead>
             @foreach ($posts as $post)
